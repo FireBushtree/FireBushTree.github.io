@@ -11,12 +11,21 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-  const result = l1
-  const carryNumber = 0
+  const result = { val: 0, next: null }
+  let prev = result
+  let carryNumber = 0
 
-  while (l2 !== null) {
-    const val = l1.val + l2.val + carryNumber
-    result.val = val % 10
+  while (l1 !== null || l2 !== null || carryNumber !== 0) {
+    const val = (l1 === null ? 0 : l1.val) +
+                (l2 === null ? 0 : l2.val) +
+                carryNumber
+    
     carryNumber = parseInt(val / 10)
+    prev.next = { val: val % 10, next: null }
+    prev = prev.next
+    l1 = l1 === null ? l1 : l1.next
+    l2 = l2 === null ? l2 : l2.next
   }
+
+  return result.next;
 };
