@@ -10,16 +10,16 @@ var merge = function(nums1, m, nums2, n) {
   let i2 = 0
 
   while (i2 < n) {
-    const n1 = nums1[i1]
-    const n2 = nums2[i2]
-
-    if (n1 === 0) {
+    if (i1 >= m) {
       for (let i = i2; i < n; i++) {
-        nums1[i1++] = nums2[i2]
+        nums1[i1++] = nums2[i]
       }
 
       return
     }
+
+    const n1 = nums1[i1]
+    const n2 = nums2[i2]
 
     if (n1 <= n2) {
       i1 ++
