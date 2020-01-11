@@ -9,21 +9,61 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isBalanced = function (root) {
+var isBalanced = function(root) {
   if (!root) {
-    return null
+    return true
   }
 
-  function getDeep(root) {
-    if (root === null) {
-      return 0
+  let minDeep = 0
+  let deep = 0
+  let nodes = [root]
+
+  while (nodes.length !== 0) {
+    deep++
+
+    if (minDeep !== 0 && deep - minDeep === 3) {
+      return false
     }
 
-    return Math.max(getDeep(root.left), getDeep(root.right)) + 1
+    let newNodes = []
+
+    for (let i = 0; i < nodes.length; i++) {
+
+
+      const currenNode = nodes[i]
+
+      if (currenNode) {
+        newNodes.push(currenNode.left)
+        newNodes.push(currenNode.right)
+      } else {
+        minDeep === 0 && (minDeep = deep)
+      }
+    }
+
+    nodes = newNodes
   }
 
-  const leftDeep = getDeep(root.left)
-  const rightDeep = getDeep(root.right)
-
-  return Math.abs(rightDeep - leftDeep) <= 1
+  return true
 };
+
+isBalanced({
+  val: 3,
+  left: {
+    val: 9,
+    left: null,
+    right: null
+  },
+  right: {
+    val: 20,
+    left: {
+      val: 15,
+      left: null,
+      right: null
+    },
+    right: {
+      val: 7,
+      left: null,
+      right: null
+    }
+  }
+})
