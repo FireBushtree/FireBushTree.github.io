@@ -55,5 +55,3 @@
 - [] Promise
 - [x] setTimeout实现setInterval
 - [] typeof和instanceof的区别
-
-
